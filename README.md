@@ -27,3 +27,23 @@ npm start
 
 - 原版 HTML：`../ningguo-renfeng-site/`
 - 图片更新：可同步覆盖 `../ningguo-renfeng-site/assets` → 本目录 `public/assets/`
+
+## 同步到 GitHub
+
+需已安装 [GitHub CLI](https://cli.github.com/)（`brew install gh`）。
+
+**第一次**：在本机登录（只需一次）：
+
+```bash
+gh auth login -h github.com
+```
+
+**之后**：在项目根目录执行：
+
+```bash
+./scripts/sync-to-github.sh
+```
+
+脚本会检测是否已配置 `origin`；若没有则创建 `ningguo-renfeng-next` 仓库并推送 `main`。自定义仓库名可设环境变量：`GITHUB_REPO_NAME=你的仓库名 ./scripts/sync-to-github.sh`。
+
+> 说明：推送必须由已登录的账号完成，无法在无人值守环境下代替你完成 OAuth/Token 授权。
