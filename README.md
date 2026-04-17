@@ -28,22 +28,28 @@ npm start
 - 原版 HTML：`../ningguo-renfeng-site/`
 - 图片更新：可同步覆盖 `../ningguo-renfeng-site/assets` → 本目录 `public/assets/`
 
-## 同步到 GitHub
+## 同步到 GitHub（`github-monorepo-init-push`）
 
-需已安装 [GitHub CLI](https://cli.github.com/)（`brew install gh`）。
+需已安装 [GitHub CLI](https://cli.github.com/)（`brew install gh`）。远端约定见根目录 **`project.env`**（`GIT_REPO` / `GIT_BRANCH`）。
 
-**第一次**：在本机登录（只需一次）：
-
-```bash
-gh auth login -h github.com
-```
-
-**之后**：在项目根目录执行：
+推荐脚本（创建仓库 + 推送 `main`，与 Cursor skill 一致）：
 
 ```bash
-./scripts/sync-to-github.sh
+cd /path/to/ningguo-renfeng-next
+./scripts/gh-monorepo-push.sh
 ```
 
-脚本会检测是否已配置 `origin`；若没有则创建 `ningguo-renfeng-next` 仓库并推送 `main`。自定义仓库名可设环境变量：`GITHUB_REPO_NAME=你的仓库名 ./scripts/sync-to-github.sh`。
+**凭证（任选其一）**
 
-> 说明：推送必须由已登录的账号完成，无法在无人值守环境下代替你完成 OAuth/Token 授权。
+1. **交互登录（一次）**：`gh auth login -h github.com`
+2. **非交互 PAT**：`export GITHUB_TOKEN=ghp_你的令牌` 后运行脚本（Classic PAT 勾选 `repo`；**不要把 token 写进仓库或聊天记录**）
+3. **仅 SSH 推送**：请先在 GitHub 网页创建**同名空仓库** `hualang/ningguo-renfeng-next`，再执行：
+
+```bash
+git remote add origin git@github.com:hualang/ningguo-renfeng-next.git
+git push -u origin main
+```
+
+若 `~/.config/gh` 不可写，可先：`export GH_CONFIG_DIR="$PWD/../.gh-config"` 再运行 `gh`。
+
+兼容旧脚本：`./scripts/sync-to-github.sh`（行为类似，仅创建逻辑略简）。
