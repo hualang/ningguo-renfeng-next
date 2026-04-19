@@ -16,6 +16,13 @@ npm run dev
 
 浏览器打开 <http://localhost:3000>。
 
+## Sanity CMS（可选）
+
+1. 在 [Sanity 管理后台](https://www.sanity.io/manage) 创建项目，记下 **Project ID** 与 **Dataset**（常用 `production`）。
+2. 复制环境变量：将 `.env.local.example` 复制为 `.env.local`，填入 `NEXT_PUBLIC_SANITY_PROJECT_ID` 等。
+3. 在 Sanity 项目 **API → CORS origins** 中加入 `http://localhost:3000` 与生产域名（如 Vercel 预览/正式 URL），否则本地或线上 **Studio** 可能无法连上 API。
+4. 本地启动后访问 <http://localhost:3000/studio>，登录 Sanity 账号，新建 **「首页」** 类型文档并填写 Hero / 焦点条字段；保存后首页对应区块会从 CMS 读取，未配置或未填写时仍使用页面内默认文案。
+
 ## 构建
 
 ```bash

@@ -63,6 +63,26 @@ git push -u origin main
 
 ---
 
+## 环境变量（Vercel：Project → Settings → Environment Variables）
+
+| 变量 | 说明 |
+|------|------|
+| `NEXT_PUBLIC_SITE_URL` | **建议配置**。正式站根地址（无尾斜杠），如 `https://www.example.com`。用于 sitemap、canonical、hreflang、Organization JSON-LD；不设则构建/本地默认 `http://localhost:3000`。 |
+| `NEXT_PUBLIC_SANITY_*` | Sanity 站点内容，见仓库 `.env.local.example`。 |
+| `RESEND_API_KEY` / `INQUIRY_TO_EMAIL` / `INQUIRY_FROM_EMAIL` | 询盘邮件（Resend）。 |
+| `FEISHU_BITABLE_WEBHOOK_URL` | **可选**。飞书多维表格 Webhook 自动化地址；不填则只发邮件。 |
+
+### 飞书多维表格对接（询盘第二落点）
+
+1. 打开目标**多维表格**，按需新建列：`姓名`、`公司`、`邮箱`、`电话`、`国家`、`需求`、`语言`、`提交时间`（列名可自定）。
+2. 右上角 **自动化** → **创建规则** → **触发条件** 选 **Webhook**（或「收到 Webhook 请求」类选项，以你当前飞书版本为准）→ 复制系统生成的 **请求 URL**。
+3. **执行操作** 选 **新增记录**，把 **Webhook 请求体**里的字段映射到各列。请求体为 JSON，字段名固定为：`name`、`company`、`email`、`phone`、`country`、`message`、`locale`、`submittedAt`（ISO 时间字符串）。
+4. 将 URL 写入 Vercel（或本地 `.env.local`）的 `FEISHU_BITABLE_WEBHOOK_URL`，重新部署。
+
+邮件发送成功后会再 POST 到该地址；若飞书写入失败，用户仍看到提交成功，错误记在 **Vercel → Functions / 日志** 或本机终端。
+
+---
+
 ## 常见问题
 
 | 现象 | 处理 |

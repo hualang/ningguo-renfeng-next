@@ -1,40 +1,54 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const nav = [
-  { href: "#capabilities", label: "能力" },
-  { href: "#solutions", label: "方案" },
-  { href: "#factory", label: "实景" },
-  { href: "#quality", label: "质量" },
-  { href: "#products", label: "产品" },
-  { href: "#customers", label: "客户" },
-  { href: "#contact", label: "联系" },
-];
+import type { SiteDictionary } from "@/lib/i18n/copy/types";
+import type { Locale } from "@/lib/i18n/config";
 
-export function SiteHeader() {
+import { LocaleSwitcher } from "./LocaleSwitcher";
+
+export function SiteHeader({
+  locale,
+  dict,
+}: {
+  locale: Locale;
+  dict: SiteDictionary;
+}) {
+  const nav = [
+    { href: "#capabilities", label: dict.header.nav.capabilities },
+    { href: "#solutions", label: dict.header.nav.solutions },
+    { href: "#factory", label: dict.header.nav.factory },
+    { href: "#quality", label: dict.header.nav.quality },
+    { href: "#products", label: dict.header.nav.products },
+    { href: "#customers", label: dict.header.nav.customers },
+    { href: "#contact", label: dict.header.nav.contact },
+  ];
+
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-content flex-wrap items-center justify-between gap-4 px-6 py-4">
-        <Link href="#top" className="flex items-center gap-3.5 text-inherit no-underline">
+        <Link
+          href={`/${locale}#top`}
+          className="flex items-center gap-3.5 text-inherit no-underline"
+        >
           <Image
             src="/assets/hero/logo-mark.png"
-            alt="宁国人峰"
+            alt={dict.header.brand}
             width={120}
             height={44}
             className="h-11 w-auto object-contain"
           />
           <div className="flex flex-col gap-0.5">
             <strong className="text-[0.92rem] font-semibold tracking-wide">
-              宁国人峰机械零部件
+              {dict.header.brand}
             </strong>
             <span className="text-[0.68rem] tracking-wide text-ink-muted">
-              Ningguo Renfeng Machinery Parts
+              {dict.header.tagline}
             </span>
           </div>
         </Link>
         <nav
           className="hidden flex-wrap items-center gap-x-6 gap-y-1 md:flex"
-          aria-label="主导航"
+          aria-label="Main"
         >
           {nav.map((item) => (
             <a
@@ -46,12 +60,15 @@ export function SiteHeader() {
             </a>
           ))}
         </nav>
-        <span
-          className="rounded-full border border-line px-3 py-1.5 text-[0.75rem] font-medium text-ink-muted"
-          title="静态 HTML 版位于同仓库 ningguo-renfeng-site/index.html"
-        >
-          Next 演示版
-        </span>
+        <div className="flex items-center gap-2">
+          <LocaleSwitcher locale={locale} altLabel={dict.header.altLocaleLabel} />
+          <span
+            className="rounded-full border border-line px-3 py-1.5 text-[0.75rem] font-medium text-ink-muted"
+            title="ningguo-renfeng-site/index.html"
+          >
+            {dict.header.badge}
+          </span>
+        </div>
       </div>
     </header>
   );

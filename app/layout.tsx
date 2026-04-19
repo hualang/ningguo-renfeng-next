@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
+import { headers } from "next/headers";
+
+import { getMetadataBase } from "@/lib/site-url";
+
 import "./globals.css";
+
+export const metadata: Metadata = {
+  metadataBase: getMetadataBase(),
+};
 
 const lexend = Lexend({
   subsets: ["latin"],
@@ -8,19 +16,17 @@ const lexend = Lexend({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "宁国人峰机械零部件有限公司 · 制造解决方案",
-  description:
-    "金属与橡胶零部件制造，IATF16949，出口协作。Ningguo Renfeng Machinery Parts.",
-};
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const h = await headers();
+  const loc = h.get("x-locale");
+  const htmlLang = loc === "en" ? "en" : "zh-CN";
+
   return (
-    <html lang="zh-CN">
+    <html lang={htmlLang}>
       <body
         className={`${lexend.variable} antialiased`}
         style={{
