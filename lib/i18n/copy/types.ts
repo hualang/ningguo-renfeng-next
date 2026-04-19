@@ -8,28 +8,23 @@ export type SiteDictionary = {
     spotlightTitle: { zh: string; en: string };
     spotlightBody: { zh: string; en: string };
   };
-  skipToContent: string;
   header: {
     brand: string;
     tagline: string;
-    badge: string;
     nav: {
       capabilities: string;
       solutions: string;
       factory: string;
       quality: string;
       products: string;
-      customers: string;
       contact: string;
     };
+    /** 切换语言时显示的对方语言名，如中文站显示 English */
     altLocaleLabel: string;
   };
   hero: {
     contact: string;
-    official: string;
-    /** 头图三张可点击入口的说明 */
-    tileAlts: [string, string, string];
-    tileHint: string;
+    heroImageAlt: string;
   };
   spotlight: { ctaQuality: string };
   pillars: {
@@ -40,16 +35,21 @@ export type SiteDictionary = {
   solutions: {
     title: string;
     intro: string;
-    items: {
-      title: string;
-      desc: string;
-      image: string;
-      cta: string;
-    }[];
+    metal: { title: string; desc: string };
+    rubber: { title: string; desc: string };
+    parts: { title: string; desc: string };
+  };
+  /** 位于「产品与工艺」之后，按金属/橡胶/部件展示图库 */
+  productShowcase: {
+    title: string;
+    /** 制造组合三卡底部，跳转至下方对应产品展示区块 */
+    jumpFromSolutions: string;
+    showMore: string;
+    showLess: string;
   };
   about: {
     title: string;
-    paragraphs: string[];
+    p1: string;
   };
   culture: {
     title: string;
@@ -61,23 +61,26 @@ export type SiteDictionary = {
   midCta: { title: string; desc: string; button: string };
   products: {
     title: string;
-    showcaseTitle: string;
-    categories: [string, string, string];
-    industriesOneLine: string;
+    intro: string;
+    /** 仅用于图片无障碍 alt，不在页面上展示 */
+    categories: string[];
   };
-  customers: { title: string; intro: string; altPat: string };
   contact: {
     title: string;
-    intro: string;
+    contactPerson: string;
+    nameLine: string;
+    contactMethodsTitle: string;
     emailLabel: string;
-    emailValue: string;
+    email: string;
     mobileLabel: string;
-    mobileValue: string;
-    whatsappLabel: string;
-    whatsappDisplay: string;
-    whatsappHref: string;
+    mobile: string;
+    /** 用于 <a href="tel:…">，如 +64223994155 */
+    mobileTelHref: string;
+    whatsAppLabel: string;
+    whatsApp: string;
+    /** 用于 WhatsApp 链接，如 https://wa.me/64223994155 */
+    whatsAppHref: string;
     address: string;
-    website: string;
     addressLines: string[];
   };
   inquiry: {

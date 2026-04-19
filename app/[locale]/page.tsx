@@ -7,7 +7,8 @@ import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { resolveHomeCms } from "@/lib/i18n/resolve-cms";
 import { getHomePage } from "@/sanity/lib/home";
 
-export const dynamic = "force-dynamic";
+/** 首页 ISR，避免 force-dynamic 在部分环境下与样式 chunk 加载偶发冲突；CMS 更新后最多延迟该秒数可见 */
+export const revalidate = 60;
 
 type Props = {
   params: { locale: string };
@@ -22,12 +23,6 @@ export default async function LocaleHomePage({ params }: Props) {
 
   return (
     <>
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-teal focus:px-3 focus:py-2 focus:text-white"
-      >
-        {dict.skipToContent}
-      </a>
       <SiteHeader locale={locale} dict={dict} />
       <HomeContent locale={locale} dict={dict} cms={cms} />
     </>

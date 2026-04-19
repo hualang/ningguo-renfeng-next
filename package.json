@@ -6,8 +6,11 @@
     "node": ">=18.17.0"
   },
   "scripts": {
+    "clean": "rm -rf .next node_modules/.cache",
     "dev": "next dev",
+    "dev:clean": "npm run clean && next dev",
     "build": "next build",
+    "build:clean": "npm run clean && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -20,6 +23,7 @@
     "react-dom": "^18",
     "resend": "^6.12.0",
     "sanity": "^3.65.1",
+    "server-only": "^0.0.1",
     "styled-components": "^6.4.0",
     "zod": "^4.3.6"
   },
@@ -27,6 +31,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "autoprefixer": "^10.5.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
     "postcss": "^8",

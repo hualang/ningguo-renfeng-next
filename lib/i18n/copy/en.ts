@@ -3,158 +3,153 @@ import type { SiteDictionary } from "./types";
 export const enDictionary: SiteDictionary = {
   meta: {
     title:
-      "Ningguo Renfeng Machinery Parts Co., Ltd. · OEM Manufacturing",
+      "Ningguo Renfeng Machinery Parts Co., Ltd. · Manufacturing Solutions",
     description:
-      "OEM metal, rubber, robotics & AI hardware components; IATF16949; precision machining & rubber curing.",
+      "Reliable OEM for metal and rubber components—industrial machinery, robotics, and AI hardware applications; IATF16949, export collaboration. Ningguo Renfeng Machinery Parts.",
   },
   cmsFallback: {
-    heroTitle: {
-      zh: "金属、橡胶、机器人及人工智能硬件组件的可靠 OEM 制造商",
-      en: "Reliable OEM for Metal, Rubber, Robotics & AI Hardware Components",
-    },
+    heroTitle: { zh: "专为可靠交付而制造", en: "Built for Reliable Delivery" },
     heroLead: {
-      zh: "为工业机械、机器人系统和人工智能硬件应用提供定制金属与橡胶零部件。",
-      en: "Custom metal and rubber parts for industrial machinery, robotics, and AI hardware applications.",
+      zh: "我们是金属与橡胶零部件领域注重质量与可追溯性的制造伙伴，面向工业机械、机器人系统及人工智能硬件等应用的可靠 OEM。",
+      en: "We are a manufacturing partner focused on quality and traceability in metal and rubber components—reliable OEM for industrial machinery, robotics, and AI hardware applications.",
     },
     heroSub: {
       zh:
-        "质量控制贯穿整个生产过程，并由 IATF16949 体系支持。我们基于图纸、样品和技术要求支持定制零件，工程师与质量人员保障稳定制造与产品控制。这些组件可用于工业机械、机器人及相关硬件；我们致力于可靠产品与长期合作。如需准确报价，请发送图纸或样品、材料、数量、表面处理及应用信息。",
+        "宁国人峰机械零部件有限公司专注金属及橡胶零部件，配备专业技术与质量工程团队，质量体系完备，物流便捷；支持基于图纸、样品与技术要求的定制，工程师与质量人员协同支撑稳定制造与产品控制。以专业高效为准则，致力于成为客户长期发展的合作伙伴。",
       en:
-        "Quality control runs through production with IATF16949. We support custom parts from drawings, samples, and technical requirements—with engineering and quality teams for stable manufacturing. Components serve industrial machinery, robotics, and related hardware. For an accurate quote, send drawings or samples, material, quantity, finishing, and application details.",
+        "Ningguo Renfeng Machinery Parts Co., Ltd. focuses on metal and rubber components, with professional engineering and quality teams, a complete quality system, and convenient logistics. Custom parts from drawings, samples, and technical requirements—with engineering and quality support for stable manufacturing and product control. We aim to be your long-term partner with professionalism and efficiency.",
     },
     spotlightTitle: {
-      zh: "成熟制造 · 体系化质量与全流程追溯",
-      en: "Mature Manufacturing · Systematic Quality & Traceability",
+      zh: "成熟体系 · 稳定交付 · 持续验证",
+      en: "Mature Systems · Reliable Delivery · Continuous Validation",
     },
     spotlightBody: {
       zh:
-        "产线覆盖从精密机加工到橡胶硫化，检测能力包括三坐标、光谱、拉力与粗糙度以及视觉检测等，满足过程与出厂多道关口。我们持续优化工艺与数据记录，为长期配套与出口协作提供稳定交付基础。",
+        "质量控制贯穿生产过程，在 IATF16949 体系框架下运行；已取得证书，并配备进口检测与实验室资源。2024 年起计划进一步引进先进检测仪器，强化过程与产品验证。",
       en:
-        "From precision machining to rubber curing—with CMM, spectrometry, tensile, roughness, and vision inspection for in-process and outgoing control. We continuously improve process and records for stable delivery and export collaboration.",
+        "Quality control throughout production under IATF16949; certified with imported inspection and lab resources. From 2024 we plan further advanced instruments to strengthen process and product validation.",
     },
   },
-  skipToContent: "Skip to content",
   header: {
     brand: "Ningguo Renfeng Machinery Parts",
     tagline: "Ningguo Renfeng Machinery Parts",
-    badge: "Next demo",
     nav: {
       capabilities: "Capabilities",
       solutions: "Solutions",
       factory: "Facility",
       quality: "Quality",
       products: "Products",
-      customers: "Customers",
       contact: "Contact",
     },
     altLocaleLabel: "中文",
   },
   hero: {
     contact: "Contact us",
-    official: "Visit corporate site",
-    tileAlts: ["Metal solutions", "Rubber solutions", "Component solutions"],
-    tileHint: "Tap an image to jump to the product gallery below",
+    heroImageAlt: "Company and manufacturing",
   },
   spotlight: { ctaQuality: "Quality system" },
   pillars: {
-    title: "From precision machining to rubber curing",
+    title: "Process and data for your component strategy",
     intro:
-      "CMM, spectrometry, tensile and roughness testing, plus vision inspection—incoming, in-process, and outgoing control.",
+      "From precision machining to rubber curing, from in-process inspection to final release—we use traceable workflows for automotive, machinery, appliances, industrial equipment, robotics, and AI hardware.",
     cards: [
       {
         title: "Precision machining",
-        desc: "CNC lathes and machining centers—from complex metal parts to ramp-up from small batch to volume.",
+        desc: "CNC lathes and machining centers—from complex metal structures to ramp-up from small batch to volume.",
         link: "See equipment",
         anchor: "#equipment",
       },
       {
         title: "Rubber & curing",
-        desc: "Rubber curing lines and process control for batch consistency in sealing and damping parts.",
+        desc: "Rubber curing lines and mature process control for batch consistency in sealing and damping parts.",
         link: "See equipment",
         anchor: "#equipment",
       },
       {
         title: "Inspection & lab",
-        desc: "CMM, spectrometry, tensile, roughness, and vision inspection for full process control.",
+        desc: "CMM, spectrometry, tensile and roughness testing, plus visual inspection, for incoming, in-process, and outgoing control.",
         link: "Certificates",
         anchor: "#quality",
+      },
+      {
+        title: "Export & collaboration",
+        desc: "English technical communication, documentation, and packaging aligned with export and OEM frameworks.",
+        link: "Request a quote",
+        anchor: "#contact",
       },
     ],
   },
   solutions: {
-    title: "Our manufacturing portfolio",
-    intro: "Capabilities by material and assembly type—tap through to the product gallery.",
-    items: [
-      {
-        title: "Metal part solutions",
-        desc:
-          "Machining, cold extrusion, hot forging, die casting, e-coat; aluminum and steel routes for off-highway, automotive, and general machinery.",
-        image: "/assets/categories/img-31.jpeg",
-        cta: "View product gallery",
-      },
-      {
-        title: "Rubber part solutions",
-        desc:
-          "Rubber curing and process control for sealing and damping parts—appliances, mobility, and multi-industry applications.",
-        image: "/assets/categories/img-29.jpeg",
-        cta: "View product gallery",
-      },
-      {
-        title: "Component solutions",
-        desc:
-          "Metal–rubber assemblies and modules for industrial machinery, robotics, and AI hardware structures.",
-        image: "/assets/categories/img-32.jpeg",
-        cta: "View product gallery",
-      },
-    ],
+    title: "Our manufacturing mix",
+    intro:
+      "Metal and rubber capabilities—from materials to assemblies—in one collaboration entry point; custom components for industrial machinery, robotics, AI hardware, and related industrial applications.",
+    metal: {
+      title: "Metal component solutions",
+      desc:
+        "Machining, cold extrusion, hot forging, die casting, e-coat; aluminum and steel routes for automotive, off-highway, agriculture, mining, and general machinery.",
+    },
+    rubber: {
+      title: "Rubber component solutions",
+      desc:
+        "Rubber curing and metal-rubber assemblies (ASSY) for appliances, mobility, industrial machinery, robotics, and sealing applications.",
+    },
+    parts: {
+      title: "Component solutions",
+      desc:
+        "Metal–rubber combinations and functional parts for assemblies and module supply across industries—including industrial machinery, robotics, and related hardware.",
+    },
+  },
+  productShowcase: {
+    title: "Product gallery",
+    jumpFromSolutions: "Product gallery",
+    showMore: "Show more",
+    showLess: "Show less",
   },
   about: {
     title: "Company overview",
-    paragraphs: [
-      "Ningguo Renfeng Machinery Parts Co., Ltd. focuses on OEM manufacturing for metal, rubber, robotics, and AI hardware. Quality control runs through production with IATF16949.",
-      "We support custom parts from drawings, samples, and technical requirements—with engineering and quality teams for stable manufacturing. Products serve industrial machinery, robotics, AI hardware, construction and farm equipment, automotive, mining, and related sectors.",
-      "We aim for reliable products and long-term partnerships. For an accurate quote, send drawings or samples, material, quantity, surface treatment, and application details.",
-    ],
+    p1:
+      "We pursue professionalism and efficiency, quality for survival, technology for development, and a leading brand—delivering high-quality products and dedicated service, committed to reliable delivery and long-term partnership.",
   },
   culture: {
-    title: "Partnership & commitment",
+    title: "Culture",
     items: [
       {
-        title: "Quality & systems",
-        desc: "End-to-end quality control with IATF16949 traceability.",
-        more: "Quality system →",
-        href: "#quality",
-      },
-      {
-        title: "Engineering & customization",
-        desc: "Drawings, samples, and specs—with engineering support on process and tolerances.",
-        more: "Capabilities →",
+        title: "Innovation",
+        desc: "Innovation at the core—improving supply quality and efficiency.",
+        more: "Learn more →",
         href: "#pillars",
       },
       {
-        title: "Applications",
-        desc: "Industrial machinery, robotics, AI hardware, and heavy industry segments.",
-        more: "Products →",
-        href: "#products",
+        title: "Continuous improvement",
+        desc: "Better products and processes, continuously.",
+        more: "Learn more →",
+        href: "#factory",
       },
       {
-        title: "Long-term collaboration",
-        desc: "Reliable delivery and transparent communication for export and OEM programs.",
-        more: "Contact →",
+        title: "Customer focus",
+        desc: "Reliable service and a trustworthy supply chain partner.",
+        more: "Learn more →",
+        href: "#contact",
+      },
+      {
+        title: "Long-term partnership",
+        desc: "Professionalism and transparency for stable long-term supply.",
+        more: "Learn more →",
         href: "#contact",
       },
     ],
   },
   factory: {
     title: "Facility tour",
-    intro: "Production, warehousing, and site views for remote understanding.",
+    intro:
+      "Production, warehousing, and site views for remote audits and risk review.",
     captions: [
       "Workshop",
       "Warehousing & logistics",
       "Production floor",
       "Production floor",
       "Production floor",
-      "Exterior",
+      "Plant exterior",
     ],
   },
   equipment: {
@@ -173,42 +168,38 @@ export const enDictionary: SiteDictionary = {
   },
   quality: {
     title: "Quality certificates",
-    certAlt: "Quality system certificate",
+    certAlt: "IATF16949 quality system certificate",
   },
   midCta: {
-    title: "Need an accurate quote?",
-    desc: "Send drawings or samples, material, quantity, finishing, and application—or reach us by email or WhatsApp.",
-    button: "Contact us",
+    title: "Have drawings or samples but unsure where to start?",
+    desc: "For accurate pricing, include material, quantity, surface finish, and application. Send requirements to our technical and quoting team—we can help define process routes, tolerances, and inspection plans.",
+    button: "Start a conversation",
   },
   products: {
     title: "Products & processes",
-    showcaseTitle: "Product gallery",
+    intro:
+      "Main processes: machining, cold extrusion, hot forging, die casting, curing, e-coat. Widely used in industrial machinery, robotics, AI hardware, construction and agricultural machinery, automotive, mining, and related sectors.",
     categories: [
-      "Metal part solutions",
-      "Rubber part solutions",
-      "Component solutions",
+      "Rubber",
+      "Metal — Aluminum",
+      "Metal — Steel",
+      "ASSY",
     ],
-    industriesOneLine:
-      "Applications include industrial machinery, robotics, AI hardware, construction and farm equipment, automotive, mining, and related industries.",
-  },
-  customers: {
-    title: "Customers (selection)",
-    intro: "A selection of partner logos.",
-    altPat: "Customer {n}",
   },
   contact: {
-    title: "Contact us",
-    intro:
-      "For inquiries, quotes, or technical discussions, reach us through the channels below.",
+    title: "Contact",
+    contactPerson: "Contact",
+    nameLine: "Mr. Zhang",
+    contactMethodsTitle: "Contact methods",
     emailLabel: "Email",
-    emailValue: "matthewzhang4155@gmail.com",
+    email: "matthewzhang4155@gmail.com",
     mobileLabel: "Mobile",
-    mobileValue: "0223994155",
-    whatsappLabel: "WhatsApp",
-    whatsappDisplay: "0223994155",
-    whatsappHref: "https://wa.me/64223994155",
+    mobile: "0223994155",
+    mobileTelHref: "tel:+64223994155",
+    whatsAppLabel: "WhatsApp",
+    whatsApp: "0223994155",
+    whatsAppHref: "https://wa.me/64223994155",
     address: "Address",
-    website: "Website",
     addressLines: [
       "No.116, Xingning Road, Ningguo City, Anhui Province, China",
       "安徽省宁国市兴宁路 116 号",
@@ -217,7 +208,7 @@ export const enDictionary: SiteDictionary = {
   inquiry: {
     title: "Request a quote",
     subtitle:
-      "Share your needs and contact details—we will reply as soon as possible. (Do not send confidential drawings in public fields.)",
+      "For inquiries, quotes, or technical discussions, share your contact details and project summary. Drawings or samples, material, quantity, surface finish, and application help us quote accurately. (Email is sent automatically; do not share sensitive drawings in public fields.)",
     name: "Name",
     company: "Company (optional)",
     email: "Email",

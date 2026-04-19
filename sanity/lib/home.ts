@@ -1,3 +1,5 @@
+import "server-only";
+
 import type { HomePageData } from "@/types/sanity";
 
 import { isSanityConfigured } from "../env";

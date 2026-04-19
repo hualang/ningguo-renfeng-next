@@ -19,7 +19,6 @@ export function SiteHeader({
     { href: "#factory", label: dict.header.nav.factory },
     { href: "#quality", label: dict.header.nav.quality },
     { href: "#products", label: dict.header.nav.products },
-    { href: "#customers", label: dict.header.nav.customers },
     { href: "#contact", label: dict.header.nav.contact },
   ];
 
@@ -62,12 +61,6 @@ export function SiteHeader({
         </nav>
         <div className="flex items-center gap-2">
           <LocaleSwitcher locale={locale} altLabel={dict.header.altLocaleLabel} />
-          <span
-            className="rounded-full border border-line px-3 py-1.5 text-[0.75rem] font-medium text-ink-muted"
-            title="ningguo-renfeng-site/index.html"
-          >
-            {dict.header.badge}
-          </span>
         </div>
       </div>
     </header>

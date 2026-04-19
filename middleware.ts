@@ -39,5 +39,11 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image).*)"],
+  matcher: [
+    /*
+     * 排除整段 /_next/*（含 static、webpack、RSC、CSS chunk），以及 api、favicon；
+     * 比只排除 _next/static|_next/image 更稳，避免个别环境下中间件误伤样式脚本。
+     */
+    "/((?!api|_next|favicon.ico).*)",
+  ],
 };

@@ -1,16 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Sanity Studio 依赖较多 ESM/子路径；不转译时易出现 vendor-chunks/@sanity.js 丢失、页面无样式等问题
+  // next-sanity / sanity / @sanity/client 见下方 serverComponentsExternalPackages，勿重复出现在 transpilePackages
   transpilePackages: [
-    "next-sanity",
-    "sanity",
     "@sanity/vision",
     "@sanity/ui",
     "@sanity/icons",
     "@sanity/util",
-    "@sanity/client",
     "styled-components",
   ],
+  experimental: {
+    // Next 14：避免 RSC 服务端把 Sanity 打进错误 chunk（vendor-chunks/@sanity.js）
+    serverComponentsExternalPackages: [
+      "@sanity/client",
+      "next-sanity",
+      "sanity",
+      "@sanity/image-url",
+    ],
+  },
 };
 
 export default nextConfig;
