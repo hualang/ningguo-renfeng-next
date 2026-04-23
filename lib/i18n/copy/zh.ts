@@ -24,9 +24,9 @@ export const zhDictionary: SiteDictionary = {
     },
     spotlightBody: {
       zh:
-        "质量控制贯穿生产过程，在 IATF16949 体系框架下运行；已取得证书，并配备进口检测与实验室资源。2024 年起计划进一步引进先进检测仪器，强化过程与产品验证。",
+        "质量控制贯穿生产过程，在 IATF16949 体系框架下运行；已取得证书，并配备进口检测与实验室资源。",
       en:
-        "Quality control throughout production under IATF16949; certified with imported inspection and lab resources. From 2024 we plan further advanced instruments to strengthen process and product validation.",
+        "Quality control throughout production under IATF16949; certified with imported inspection and lab resources.",
     },
   },
   header: {
@@ -154,9 +154,9 @@ export const zhDictionary: SiteDictionary = {
     title: "主要生产与检测设备",
     captions: [
       "橡胶硫化机",
-      "加工中心",
       "锻压设备",
       "数控车床",
+      "加工中心",
       "拉力试验机",
       "三坐标 CMM",
       "视觉检测仪",

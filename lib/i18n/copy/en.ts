@@ -25,9 +25,9 @@ export const enDictionary: SiteDictionary = {
     },
     spotlightBody: {
       zh:
-        "质量控制贯穿生产过程，在 IATF16949 体系框架下运行；已取得证书，并配备进口检测与实验室资源。2024 年起计划进一步引进先进检测仪器，强化过程与产品验证。",
+        "质量控制贯穿生产过程，在 IATF16949 体系框架下运行；已取得证书，并配备进口检测与实验室资源。",
       en:
-        "Quality control throughout production under IATF16949; certified with imported inspection and lab resources. From 2024 we plan further advanced instruments to strengthen process and product validation.",
+        "Quality control throughout production under IATF16949; certified with imported inspection and lab resources.",
     },
   },
   header: {
@@ -156,9 +156,9 @@ export const enDictionary: SiteDictionary = {
     title: "Key production & test equipment",
     captions: [
       "Rubber curing press",
-      "Machining center",
       "Forging / forming",
       "CNC lathe",
+      "Machining center",
       "Tensile tester",
       "CMM",
       "Vision inspection",
