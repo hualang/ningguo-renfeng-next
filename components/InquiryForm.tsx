@@ -24,7 +24,6 @@ export function InquiryForm({
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">(
     "idle",
   );
-  /** `"config"` = 缺环境变量文案；其余为服务端返回的补充说明（如 Resend 报错） */
   const [errorDetail, setErrorDetail] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent) {
@@ -50,7 +49,6 @@ export function InquiryForm({
         ok?: boolean;
         error?: string;
         message?: string;
-        issues?: { fieldErrors?: Record<string, string[]> };
       };
       if (res.status === 503 && data.error === "server_config") {
         setStatus("error");
@@ -59,17 +57,7 @@ export function InquiryForm({
       }
       if (!res.ok || !data.ok) {
         setStatus("error");
-        let hint =
-          typeof data.message === "string" && data.message.trim()
-            ? data.message.trim()
-            : null;
-        if (!hint && data.error === "validation" && data.issues?.fieldErrors) {
-          const first = Object.values(data.issues.fieldErrors).find(
-            (a) => a?.length,
-          );
-          if (first?.[0]) hint = first[0];
-        }
-        setErrorDetail(hint ?? "generic");
+        setErrorDetail("generic");
         return;
       }
       setStatus("success");
@@ -82,9 +70,7 @@ export function InquiryForm({
       setHp("");
     } catch {
       setStatus("error");
-      setErrorDetail(
-        navigator.onLine === false ? "offline" : "generic",
-      );
+      setErrorDetail("generic");
     }
   }
 
@@ -197,33 +183,9 @@ export function InquiryForm({
             />
           </div>
           {status === "error" && (
-            <div className="space-y-1 text-[0.85rem]" role="alert">
-              <p className="text-red-700">
-                {errorDetail === "config" ? labels.errorConfig : labels.error}
-              </p>
-              {errorDetail &&
-                errorDetail !== "config" &&
-                errorDetail !== "generic" &&
-                errorDetail !== "offline" && (
-                  <p className="rounded border border-red-200 bg-red-50 px-3 py-2 font-mono text-[0.75rem] leading-relaxed text-red-900">
-                    {errorDetail}
-                  </p>
-                )}
-              {errorDetail === "offline" && (
-                <p className="text-red-700/90">
-                  {locale === "zh"
-                    ? "当前网络不可用，请检查连接后重试。"
-                    : "You appear offline. Check your connection and try again."}
-                </p>
-              )}
-              {errorDetail === "generic" && (
-                <p className="text-ink-muted">
-                  {locale === "zh"
-                    ? "若在海外访问，可多试几次；仍为失败请到 Vercel → 项目 → Deployments → 对应部署 → Functions / Logs 查看 [inquiry] 日志。"
-                    : "Retry in a moment. If it persists, check Vercel → your deployment → Functions / Logs for [inquiry]."}
-                </p>
-              )}
-            </div>
+            <p className="text-[0.85rem] text-red-700" role="alert">
+              {errorDetail === "config" ? labels.errorConfig : labels.error}
+            </p>
           )}
           <div className="flex flex-wrap items-center gap-4 pt-1">
             <button
