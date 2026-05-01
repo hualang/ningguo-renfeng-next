@@ -165,7 +165,7 @@ export const enDictionary: SiteDictionary = {
       "Spectrometer",
       "Roughness tester",
       "Rockwell hardness tester",
-      "Optical projector (vision measuring)",
+      "Optical projector",
     ],
   },
   quality: {
