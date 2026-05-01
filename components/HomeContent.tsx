@@ -242,6 +242,8 @@ export function HomeContent({
             "/assets/testing/img-23.jpeg",
             "/assets/testing/img-24.jpeg",
             "/assets/testing/img-25.jpeg",
+            "/assets/testing/img-hardness-tester.png",
+            "/assets/testing/img-vision-projector.png",
           ].map((src, i) => (
             <figure
               key={src}
@@ -269,10 +271,10 @@ export function HomeContent({
         <div className="mx-auto max-w-4xl">
           <figure className="m-0 overflow-hidden rounded-xl border border-line bg-white p-4 shadow-sm md:p-6">
             <Image
-              src="/assets/certs/image27.jpeg"
+              src="/assets/certs/iatf16949-certificate.png"
               alt={dict.quality.certAlt}
-              width={1600}
-              height={1200}
+              width={1700}
+              height={2400}
               className="h-auto w-full"
               sizes="(max-width: 896px) 100vw, 896px"
             />

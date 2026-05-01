@@ -162,6 +162,8 @@ export const zhDictionary: SiteDictionary = {
       "视觉检测仪",
       "光谱仪",
       "粗糙度仪",
+      "硬度计（洛氏）",
+      "投影仪（影像测量仪）",
     ],
   },
   quality: {
