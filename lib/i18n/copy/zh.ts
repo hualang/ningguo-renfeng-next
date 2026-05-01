@@ -222,6 +222,11 @@ export const zhDictionary: SiteDictionary = {
     errorConfig:
       "询盘邮件未配置：请在服务器环境变量中设置 RESEND_API_KEY 与 INQUIRY_TO_EMAIL。",
     privacy: "提交即表示您同意我们仅为商务联系处理上述信息。",
+    validationName: "请填写姓名或称呼。",
+    validationEmail:
+      "请填写有效的电子邮箱（须为半角格式，例如 name@qq.com）。勿使用全角符号。",
+    validationMessageMin: "需求说明请至少填写 5 个字符，便于我们理解需求。",
+    validationOther: "部分内容未通过校验（例如选填字段过长）。请检查后重试。",
   },
   footer: {
     copyright: "© 宁国人峰机械零部件有限公司",

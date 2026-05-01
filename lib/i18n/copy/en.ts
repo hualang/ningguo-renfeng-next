@@ -225,6 +225,11 @@ export const enDictionary: SiteDictionary = {
       "Email not configured: set RESEND_API_KEY and INQUIRY_TO_EMAIL on the server.",
     privacy:
       "By submitting, you agree we may use this information only for business follow-up.",
+    validationName: "Please enter your name.",
+    validationEmail:
+      "Please enter a valid email address using ASCII characters (e.g. name@company.com).",
+    validationMessageMin: "Please enter at least 5 characters in the message field.",
+    validationOther: "Some optional fields may be too long or invalid. Please shorten and try again.",
   },
   footer: {
     copyright: "© Ningguo Renfeng Machinery Parts Co., Ltd.",

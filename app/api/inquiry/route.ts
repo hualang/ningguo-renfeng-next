@@ -1,23 +1,11 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { z } from "zod";
 
+import { inquiryPayloadSchema } from "@/lib/inquiry/inquiry-payload-schema";
+import type { InquiryPayload } from "@/lib/inquiry/inquiry-payload-schema";
 import { postInquiryToFeishu } from "@/lib/inquiry/feishu-webhook";
 
-const inquirySchema = z.object({
-  name: z.string().min(1).max(120),
-  company: z.string().max(200).optional(),
-  email: z.string().email(),
-  phone: z.string().max(40).optional(),
-  country: z.string().max(120).optional(),
-  message: z.string().min(5).max(8000),
-  locale: z.enum(["zh", "en"]),
-});
-
-function buildBody(
-  data: z.infer<typeof inquirySchema>,
-  lang: "zh" | "en",
-): { text: string; html: string } {
+function buildBody(data: InquiryPayload, lang: "zh" | "en"): { text: string; html: string } {
   const lines =
     lang === "zh"
       ? [
@@ -78,7 +66,7 @@ export async function POST(request: Request) {
   }
   delete json.hp;
 
-  const parsed = inquirySchema.safeParse(json);
+  const parsed = inquiryPayloadSchema.safeParse(json);
   if (!parsed.success) {
     return NextResponse.json(
       { ok: false, error: "validation", issues: parsed.error.flatten() },

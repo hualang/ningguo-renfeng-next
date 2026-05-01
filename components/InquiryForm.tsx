@@ -4,8 +4,11 @@ import { useState } from "react";
 
 import type { SiteDictionary } from "@/lib/i18n/copy/types";
 import type { Locale } from "@/lib/i18n/config";
+import { inquiryPayloadSchema } from "@/lib/inquiry/inquiry-payload-schema";
 
 type Labels = SiteDictionary["inquiry"];
+
+type FieldKey = "name" | "email" | "message" | "company" | "phone" | "country";
 
 export function InquiryForm({
   locale,
@@ -25,23 +28,77 @@ export function InquiryForm({
     "idle",
   );
   const [errorDetail, setErrorDetail] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Partial<Record<FieldKey, string>>>(
+    {},
+  );
+  const [validationBanner, setValidationBanner] = useState<string | null>(null);
+
+  function patchField(
+    key: FieldKey,
+    value: string,
+    setter: React.Dispatch<React.SetStateAction<string>>,
+  ) {
+    setter(value);
+    setValidationBanner(null);
+    setFieldErrors((prev) => {
+      if (!(key in prev)) return prev;
+      const next = { ...prev };
+      delete next[key];
+      return next;
+    });
+  }
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setStatus("sending");
+    setFieldErrors({});
+    setValidationBanner(null);
     setErrorDetail(null);
+
+    const payload = {
+      name: name.trim(),
+      company: company.trim() || undefined,
+      email: email.trim(),
+      phone: phone.trim() || undefined,
+      country: country.trim() || undefined,
+      message: message.trim(),
+      locale,
+    };
+
+    const parsed = inquiryPayloadSchema.safeParse(payload);
+    if (!parsed.success) {
+      const flat = parsed.error.flatten().fieldErrors;
+      const nextErr: Partial<Record<FieldKey, string>> = {};
+      if (flat.name?.length) nextErr.name = labels.validationName;
+      if (flat.email?.length) nextErr.email = labels.validationEmail;
+      if (flat.message?.length) nextErr.message = labels.validationMessageMin;
+      let other =
+        !!(flat.company?.length || flat.phone?.length || flat.country?.length);
+      if (parsed.error.flatten().formErrors?.length)
+        other = true;
+      setFieldErrors(nextErr);
+      setValidationBanner(other ? labels.validationOther : null);
+
+      requestAnimationFrame(() => {
+        const firstId = flat.name?.length
+          ? "inquiry-name"
+          : flat.email?.length
+            ? "inquiry-email"
+            : flat.message?.length
+              ? "inquiry-message"
+              : null;
+        if (firstId) document.getElementById(firstId)?.focus();
+      });
+      setStatus("idle");
+      return;
+    }
+
+    setStatus("sending");
     try {
       const res = await fetch("/api/inquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: name.trim(),
-          company: company.trim() || undefined,
-          email: email.trim(),
-          phone: phone.trim() || undefined,
-          country: country.trim() || undefined,
-          message: message.trim(),
-          locale,
+          ...payload,
           hp,
         }),
       });
@@ -74,8 +131,10 @@ export function InquiryForm({
     }
   }
 
-  const inputClass =
-    "mt-1 w-full rounded border border-line bg-white px-3 py-2.5 text-[0.9rem] text-ink outline-none transition focus:border-teal focus:ring-1 focus:ring-teal/30";
+  const inputBase =
+    "mt-1 w-full rounded border bg-white px-3 py-2.5 text-[0.9rem] text-ink outline-none transition focus:ring-1";
+  const inputOk = `${inputBase} border-line focus:border-teal focus:ring-teal/30`;
+  const inputBad = `${inputBase} border-red-400 focus:border-red-500 focus:ring-red-400/35`;
 
   return (
     <div className="rounded-lg border border-line bg-surface p-6">
@@ -101,18 +160,29 @@ export function InquiryForm({
               onChange={(e) => setHp(e.target.value)}
             />
           </div>
+          {validationBanner && (
+            <p className="rounded border border-amber-200 bg-amber-50 px-3 py-2 text-[0.8rem] text-amber-950">
+              {validationBanner}
+            </p>
+          )}
           <div>
             <label htmlFor="inquiry-name" className="text-[0.78rem] font-semibold text-ink">
               {labels.name} <span className="text-red-600">*</span>
             </label>
             <input
               id="inquiry-name"
-              className={inputClass}
-              required
+              className={fieldErrors.name ? inputBad : inputOk}
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => patchField("name", e.target.value, setName)}
               maxLength={120}
+              aria-invalid={!!fieldErrors.name}
+              aria-describedby={fieldErrors.name ? "inquiry-name-err" : undefined}
             />
+            {fieldErrors.name && (
+              <p id="inquiry-name-err" className="mt-1 text-[0.78rem] text-red-700">
+                {fieldErrors.name}
+              </p>
+            )}
           </div>
           <div>
             <label htmlFor="inquiry-company" className="text-[0.78rem] font-semibold text-ink">
@@ -120,11 +190,18 @@ export function InquiryForm({
             </label>
             <input
               id="inquiry-company"
-              className={inputClass}
+              className={fieldErrors.company ? inputBad : inputOk}
               value={company}
-              onChange={(e) => setCompany(e.target.value)}
+              onChange={(e) => patchField("company", e.target.value, setCompany)}
               maxLength={200}
+              aria-invalid={!!fieldErrors.company}
+              aria-describedby={fieldErrors.company ? "inquiry-company-err" : undefined}
             />
+            {fieldErrors.company && (
+              <p id="inquiry-company-err" className="mt-1 text-[0.78rem] text-red-700">
+                {fieldErrors.company}
+              </p>
+            )}
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
@@ -134,12 +211,18 @@ export function InquiryForm({
               <input
                 id="inquiry-email"
                 type="email"
-                className={inputClass}
-                required
                 autoComplete="email"
+                className={fieldErrors.email ? inputBad : inputOk}
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => patchField("email", e.target.value, setEmail)}
+                aria-invalid={!!fieldErrors.email}
+                aria-describedby={fieldErrors.email ? "inquiry-email-err" : undefined}
               />
+              {fieldErrors.email && (
+                <p id="inquiry-email-err" className="mt-1 text-[0.78rem] text-red-700">
+                  {fieldErrors.email}
+                </p>
+              )}
             </div>
             <div>
               <label htmlFor="inquiry-phone" className="text-[0.78rem] font-semibold text-ink">
@@ -148,12 +231,19 @@ export function InquiryForm({
               <input
                 id="inquiry-phone"
                 type="tel"
-                className={inputClass}
+                className={fieldErrors.phone ? inputBad : inputOk}
                 autoComplete="tel"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => patchField("phone", e.target.value, setPhone)}
                 maxLength={40}
+                aria-invalid={!!fieldErrors.phone}
+                aria-describedby={fieldErrors.phone ? "inquiry-phone-err" : undefined}
               />
+              {fieldErrors.phone && (
+                <p id="inquiry-phone-err" className="mt-1 text-[0.78rem] text-red-700">
+                  {fieldErrors.phone}
+                </p>
+              )}
             </div>
           </div>
           <div>
@@ -162,11 +252,18 @@ export function InquiryForm({
             </label>
             <input
               id="inquiry-country"
-              className={inputClass}
+              className={fieldErrors.country ? inputBad : inputOk}
               value={country}
-              onChange={(e) => setCountry(e.target.value)}
+              onChange={(e) => patchField("country", e.target.value, setCountry)}
               maxLength={120}
+              aria-invalid={!!fieldErrors.country}
+              aria-describedby={fieldErrors.country ? "inquiry-country-err" : undefined}
             />
+            {fieldErrors.country && (
+              <p id="inquiry-country-err" className="mt-1 text-[0.78rem] text-red-700">
+                {fieldErrors.country}
+              </p>
+            )}
           </div>
           <div>
             <label htmlFor="inquiry-message" className="text-[0.78rem] font-semibold text-ink">
@@ -174,13 +271,19 @@ export function InquiryForm({
             </label>
             <textarea
               id="inquiry-message"
-              className={`${inputClass} min-h-[120px] resize-y`}
-              required
+              className={`${fieldErrors.message ? inputBad : inputOk} min-h-[120px] resize-y`}
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              onChange={(e) => patchField("message", e.target.value, setMessage)}
               maxLength={8000}
               rows={5}
+              aria-invalid={!!fieldErrors.message}
+              aria-describedby={fieldErrors.message ? "inquiry-message-err" : undefined}
             />
+            {fieldErrors.message && (
+              <p id="inquiry-message-err" className="mt-1 text-[0.78rem] text-red-700">
+                {fieldErrors.message}
+              </p>
+            )}
           </div>
           {status === "error" && (
             <p className="text-[0.85rem] text-red-700" role="alert">

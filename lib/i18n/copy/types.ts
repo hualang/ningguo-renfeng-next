@@ -98,6 +98,10 @@ export type SiteDictionary = {
     error: string;
     errorConfig: string;
     privacy: string;
+    validationName: string;
+    validationEmail: string;
+    validationMessageMin: string;
+    validationOther: string;
   };
   footer: {
     copyright: string;
