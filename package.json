@@ -12,7 +12,8 @@
     "build": "next build",
     "build:clean": "npm run clean && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:static-html": "node scripts/build-static-html.mjs"
   },
   "dependencies": {
     "@sanity/image-url": "^1.0.2",

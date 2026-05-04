@@ -390,7 +390,7 @@ export function HomeContent({
               </dl>
             </div>
           </div>
-          <InquiryForm locale={locale} labels={dict.inquiry} />
+          <InquiryForm locale={locale} labels={dict.inquiry} contactEmail={dict.contact.email} />
         </div>
       </section>
 

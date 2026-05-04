@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-import { inquiryPayloadSchema } from "@/lib/inquiry/inquiry-payload-schema";
-import type { InquiryPayload } from "@/lib/inquiry/inquiry-payload-schema";
+import { inquiryPayloadSchema, type InquiryPayload } from "@/lib/inquiry/inquiry-payload-schema";
 import { postInquiryToFeishu } from "@/lib/inquiry/feishu-webhook";
 
 function buildBody(data: InquiryPayload, lang: "zh" | "en"): { text: string; html: string } {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { SyncHtmlLang } from "@/components/SyncHtmlLang";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getOrganizationJsonLd } from "@/lib/seo/organization-json-ld";
@@ -35,6 +36,7 @@ export default function LocaleLayout({ children, params }: Props) {
   const jsonLd = getOrganizationJsonLd(params.locale);
   return (
     <>
+      <SyncHtmlLang locale={params.locale} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLd }}

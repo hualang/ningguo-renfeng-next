@@ -2,13 +2,21 @@ import { notFound } from "next/navigation";
 
 import { HomeContent } from "@/components/HomeContent";
 import { SiteHeader } from "@/components/SiteHeader";
-import { isLocale, type Locale } from "@/lib/i18n/config";
+import { isLocale, locales, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { resolveHomeCms } from "@/lib/i18n/resolve-cms";
 import { getHomePage } from "@/sanity/lib/home";
 
-/** 首页 ISR，避免 force-dynamic 在部分环境下与样式 chunk 加载偶发冲突；CMS 更新后最多延迟该秒数可见 */
-export const revalidate = 60;
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+/** 离线静态包构建（npm run build:static-html）：与 output export 对齐，不写 ISR */
+export const dynamic =
+  process.env.STATIC_HTML_EXPORT === "1" ? "force-static" : undefined;
+
+export const revalidate =
+  process.env.STATIC_HTML_EXPORT === "1" ? undefined : 60;
 
 type Props = {
   params: { locale: string };

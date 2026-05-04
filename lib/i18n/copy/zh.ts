@@ -227,6 +227,9 @@ export const zhDictionary: SiteDictionary = {
       "请填写有效的电子邮箱（须为半角格式，例如 name@qq.com）。勿使用全角符号。",
     validationMessageMin: "需求说明请至少填写 5 个字符，便于我们理解需求。",
     validationOther: "部分内容未通过校验（例如选填字段过长）。请检查后重试。",
+    staticInquiryTitle: "在线询盘（离线包）",
+    staticInquiryBody:
+      "本文件夹为离线浏览版本，不包含在线提交与服务器发信。请直接通过下方邮件或电话/WhatsApp 联系；正式网站以线上部署版本为准。",
   },
   footer: {
     copyright: "© 宁国人峰机械零部件有限公司",

@@ -102,6 +102,8 @@ export type SiteDictionary = {
     validationEmail: string;
     validationMessageMin: string;
     validationOther: string;
+    staticInquiryTitle: string;
+    staticInquiryBody: string;
   };
   footer: {
     copyright: string;

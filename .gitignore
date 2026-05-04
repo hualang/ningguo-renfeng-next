@@ -32,6 +32,10 @@ project.env.local
 # vercel
 .vercel
 
+# static export zip (local only)
+renfeng-site-static.zip
+.static-export-bak/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

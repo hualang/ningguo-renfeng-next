@@ -230,6 +230,9 @@ export const enDictionary: SiteDictionary = {
       "Please enter a valid email address using ASCII characters (e.g. name@company.com).",
     validationMessageMin: "Please enter at least 5 characters in the message field.",
     validationOther: "Some optional fields may be too long or invalid. Please shorten and try again.",
+    staticInquiryTitle: "Inquiry (offline bundle)",
+    staticInquiryBody:
+      "This offline package has no online form or server email. Please use the email or phone/WhatsApp shown in the contact section; the live site is the deployed version.",
   },
   footer: {
     copyright: "© Ningguo Renfeng Machinery Parts Co., Ltd.",

@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
+const staticHtmlExport = process.env.STATIC_HTML_EXPORT === "1";
+
 const nextConfig = {
+  ...(staticHtmlExport
+    ? {
+        output: "export",
+        images: { unoptimized: true },
+        trailingSlash: true,
+      }
+    : {}),
   // Sanity Studio 依赖较多 ESM/子路径；不转译时易出现 vendor-chunks/@sanity.js 丢失、页面无样式等问题
   // next-sanity / sanity / @sanity/client 见下方 serverComponentsExternalPackages，勿重复出现在 transpilePackages
   transpilePackages: [

@@ -10,7 +10,30 @@ type Labels = SiteDictionary["inquiry"];
 
 type FieldKey = "name" | "email" | "message" | "company" | "phone" | "country";
 
-export function InquiryForm({
+/** 离线静态包：无 API、无表单，仅引导至邮件 */
+function InquiryFormStatic({
+  labels,
+  contactEmail,
+}: {
+  labels: Labels;
+  contactEmail: string;
+}) {
+  return (
+    <div className="rounded-lg border border-line bg-surface p-6">
+      <h3 className="mb-1 text-lg font-semibold text-ink">{labels.staticInquiryTitle}</h3>
+      <p className="mb-4 text-[0.85rem] leading-relaxed text-ink-muted">{labels.staticInquiryBody}</p>
+      <p className="mb-1 text-[0.78rem] font-semibold text-ink">{labels.email}</p>
+      <a
+        href={`mailto:${contactEmail}`}
+        className="break-all text-[0.9rem] font-medium text-teal-dark underline decoration-teal underline-offset-2"
+      >
+        {contactEmail}
+      </a>
+    </div>
+  );
+}
+
+function InquiryFormInteractive({
   locale,
   labels,
 }: {
@@ -73,8 +96,7 @@ export function InquiryForm({
       if (flat.message?.length) nextErr.message = labels.validationMessageMin;
       let other =
         !!(flat.company?.length || flat.phone?.length || flat.country?.length);
-      if (parsed.error.flatten().formErrors?.length)
-        other = true;
+      if (parsed.error.flatten().formErrors?.length) other = true;
       setFieldErrors(nextErr);
       setValidationBanner(other ? labels.validationOther : null);
 
@@ -304,4 +326,20 @@ export function InquiryForm({
       )}
     </div>
   );
+}
+
+export function InquiryForm({
+  locale,
+  labels,
+  contactEmail,
+}: {
+  locale: Locale;
+  labels: Labels;
+  /** 离线静态导出时展示 mailto：取字典里的联系邮箱即可 */
+  contactEmail: string;
+}) {
+  if (process.env.NEXT_PUBLIC_STATIC_HTML_EXPORT === "true") {
+    return <InquiryFormStatic labels={labels} contactEmail={contactEmail} />;
+  }
+  return <InquiryFormInteractive locale={locale} labels={labels} />;
 }

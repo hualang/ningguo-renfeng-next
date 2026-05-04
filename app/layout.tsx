@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
-import { headers } from "next/headers";
 
 import { getMetadataBase } from "@/lib/site-url";
 
@@ -16,17 +15,13 @@ const lexend = Lexend({
   display: "swap",
 });
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const h = await headers();
-  const loc = h.get("x-locale");
-  const htmlLang = loc === "en" ? "en" : "zh-CN";
-
   return (
-    <html lang={htmlLang}>
+    <html lang="zh-CN" suppressHydrationWarning>
       <body
         className={`${lexend.variable} antialiased`}
         style={{
